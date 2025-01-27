@@ -1,0 +1,144 @@
+---
+sidebar_position: 1
+title: LKDS
+toc_max_heading_level: 4
+---
+import { useMemo, createElement } from 'react';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+import { updateTOC } from './services/index.js'
+
+import Config1URL from './img/config1.jpg';
+import StartPage from './img/programm-start.png';
+import ConfigLBProURL from './img/programm.png';
+import LKDSProCfg from './img/lkdsprocfg.png';
+import LKDSProCfgStart from './img/lkdsprocfg-start.png';
+
+import './css/index.css';
+
+# Конфигурирование ОБь
+
+
+<Tabs>
+  <TabItem value="pc" label="Компьютер&Ноутбук" onClick={console.log}>
+    <br/>
+    ### Этап 1: Установка ПО
+    Для работы с диспетчерской системой необходимо установить следующий набор программного обеспечения:
+
+    #### Для компьютеров и ноутбуков:
+    - [Скачайте и установите программный стек LKDS](https://lkds.ru/upload/programs/LKDSDrv.msi).  
+      Он содержит инструменты для подключения, конфигурирования и мониторинга системы.
+    ---
+    
+    <br/>
+    ### Этап 2: Подключение
+    Настройки выполняются через программу **ConfigLBPro** <ProgrammIcon url={ConfigLBProURL} type='span'/>.
+
+    #### Вход:
+    Открываем программу.
+
+    При входе есть 4 способа подключения к лифтовому блоку:
+    <div className='programm-content'><img src={StartPage} alt="Конфигурирование" className='programm-content__image' /></div>
+    1. По COM-порту: подключаемся по USB (USB-A / USB-Mini-B). (Рекомендуется! Не надо настраивать сеть)
+    2. По статическим IP-адресам. (Сложно)
+    3. По облаку и кнопкам.
+    3. По облаку.
+
+    #### Подключаемся через USB **(1 пункт)**:
+    - Устанавливаем [драйвер](https://lkds.ru/upload/programs/VCP_v140.rar) для работы USB как COM-порта (Обязательно). Перезагружаем компьютер.
+    - Подключаем по USB компьютер и лифтовой блок.
+    - Открываем программу **ConfigLBPro** <ProgrammIcon url={ConfigLBProURL} type='span' />.
+    ---
+
+    <br/>
+    ### Этап 3: Настройки
+    #### Начальные настройки:
+    1. Укажите ключ. Ключ будет предоставлен [системным администратором](https://wa.me/996777145494) (или можете задать своё).
+    2. Задайте временную зону `UTC+6` (timezone 6am+).  
+      <div className='programm-content'><img src={Config1URL} alt="Конфигурирование" className='programm-content__image' /></div>
+    
+    :::info Обязательно
+    Сохраняйте настройки, нажав на кнопку **сохранить**!
+    :::
+
+    #### Настройки для удалённого и локального мониторинга лифтами:
+    <Tabs>
+      <TabItem value='remote-connect' label='Удалённое'>
+        Для удалённого мониторинга достаточно сделать начальные настройки.
+
+        Также обязательно должен быть интернет!
+
+        :::info Обязательно
+        Подключить интернет к лифтовому блоку!
+        :::
+      </TabItem>
+      <TabItem value='local-connect' label='Локальное'>
+        Компьютер и лифтовой блок должны быть подключены к одному маршутизатору!
+
+      #### Настройки в программе **ConfigLBPro** <ProgrammIcon url={ConfigLBProURL} />:
+        1. В разделе собственные выберите тип соеденения _Static_.
+        2. Придумайте маску сети. К примеру 192.168.0.1.
+        3. Придумайте IP-адрес. К примеру 192.168.0.101, если это второй _лифтовой блок_, то 192.168.0.102. IP должен быть уникальным!
+        4. Сохраните настройки.
+      
+      #### Настройки в компьютере/ноутбуке:
+        1. В настройках сети укажите статический IP-адрес для компьютера, чтобы он находился в одной сети с лифтовым блоком.
+          Например:
+
+            - Если у лифтового блока подсеть 192.168.0.1, его IP-адрес будет 192.168.0.101.
+            - В таком случае для компьютера можно указать IP-адрес 192.168.0.100.
+          
+            Это позволит компьютеру и лифтовому блоку "видеть" друг друга и работать вместе.
+        2. Также укажите одну подсеть. Например, если у лб подсеть 192.168.0.1 у компьютера/ноутбука укажите ту же подсеть.
+
+      #### Настройки в программе LKDSProCFG <ProgrammIcon url={LKDSProCfg} />:
+      В этой программе настраивается сетевая связь между компьютером/ноутбуком и лифтовым блоком.
+
+      Открываем программу.
+      <div className='programm-content network-programm-content'><img src={LKDSProCfgStart} alt="Конфигурирование" className='programm-content__image' /></div>
+
+        :::note
+        ЛБ - лифтовой блок.
+        :::
+      </TabItem>
+    </Tabs>
+    ---
+
+    <br/>
+    ### Этап 4: Отображение
+    После завершения подключения и настройки:
+    - Проверьте отображение устройств в ПО **configLBPro**.
+    - Убедитесь, что все лифтовые блоки и компьютеры "видят" друг друга в сети.
+    - Проверьте доступ к интерфейсу управления через ПО LKDSDomain.
+  </TabItem>
+  <TabItem value="mobile" label="Мобильные устройства">
+    <br/>
+    ### Этап 1: Установка ПО
+    Для работы с диспетчерской системой необходимо установить следующий набор программного обеспечения:
+
+    #### Для мобильных устройств:
+    - [Приложение для конфигурирования](https://play.google.com/store/apps/details?id=lkds.atoolcloudplus) (только для настройки).
+    - [Приложение для мониторинга лифтов](https://play.google.com/store/apps/details?id=lkds.kspult) (управление и контроль работы).
+    ---
+  </TabItem>
+</Tabs>
+
+export function ProgrammIcon(props) {
+  const { type='div', url } = props;
+
+  if (!url) throw new Error('The URL must be passed to the props! props:url');
+
+  const changeBlock = useMemo(() => {
+    if (type !== 'div' && type !== 'span') {
+      throw new Error("ProgrammIcon: Type can be only the div or span!");
+
+      return null
+    };
+    const children = <img src={url} alt="Programm icon" className="programm__image" />;
+
+    return createElement(type, { props: {}, className: 'programm' }, children);
+  }, [props]);
+
+  return <>{changeBlock}</>;
+}

@@ -1,0 +1,9 @@
+{
+  "label": "Начало работы",
+  "description": "Выбери что будешь изучать!",
+  "position": 2,
+  "link": { 
+    "type": "generated-index",
+    "slug": "getting-started"
+  }
+}
